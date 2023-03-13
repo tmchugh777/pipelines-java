@@ -22,14 +22,6 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=tmchugh777_pipelines-java
 
-#Run sonar scan
-- task: SonarCloudAnalyze@1
-
-#Publish results
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
-
 
 - task: Maven@3
   inputs:
@@ -41,6 +33,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+#Run sonar scan
+- task: SonarCloudAnalyze@1
+
+#Publish results
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 #- task: ServiceNow-DevOps-Build-Sonar-Registration@1
  # inputs:

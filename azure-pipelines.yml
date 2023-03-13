@@ -11,9 +11,10 @@ pool:
 
 steps:
 # Prepare Analysis Configuration task
-- task: SonarQubePrepare@5
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'ADO-Sonar'
+    SonarCloud: 'SonarCloud'
+    organization: 'tmchugh777'
     scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
@@ -21,9 +22,11 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=tmchugh777_pipelines-java
 
-- task: SonarQubeAnalyze@5
-# Publish Quality Gate Result task
-- task: SonarQubePublish@5
+# Run code anaylsis
+- task: SonarCloudAnalyze@1
+
+#Publish results
+- task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
 

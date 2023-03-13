@@ -21,6 +21,7 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=tmchugh777_pipelines-java
 
+- task: SonarQubeAnalyze@5
 # Publish Quality Gate Result task
 - task: SonarQubePublish@5
   inputs:

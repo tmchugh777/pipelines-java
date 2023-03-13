@@ -10,6 +10,22 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# Prepare Analysis Configuration task
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'ADO-Sonar'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectKey=tmchugh777_pipelines-java
+
+# Publish Quality Gate Result task
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'

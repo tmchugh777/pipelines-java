@@ -20,7 +20,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=tmchugh777_pipelines2
+      sonar.projectKey=tmchugh777_pipelines-java
 
 #Run sonar scan
 - task: SonarCloudAnalyze@1

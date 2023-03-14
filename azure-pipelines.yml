@@ -48,7 +48,7 @@ steps:
     #goals: 'package'
 
 #Run sonar scan
-#- task: SonarCloudAnalyze@1
+- task: SonarCloudAnalyze@1
 
 #Publish results
 - task: SonarCloudPublish@1

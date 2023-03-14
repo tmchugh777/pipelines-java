@@ -15,7 +15,8 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'tmchugh777'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
@@ -47,7 +48,7 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
+    sonarQubeRunAnalysis: false
     sqMavenPluginVersionChoice: 'latest'
 
 #Run sonar scan

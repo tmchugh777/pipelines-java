@@ -15,7 +15,6 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'tmchugh777'
-    scannerMode: 'CLI'
     configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 

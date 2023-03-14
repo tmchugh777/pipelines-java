@@ -10,18 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
 # Prepare Analysis Configuration task
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'tmchugh777'
+    scannerMode: 'CLI'
     configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.sources=src
       sonar.projectKey=tmchugh777_pipelines-java
+
 
 #- task: Maven@4
   #inputs:

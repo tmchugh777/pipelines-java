@@ -22,6 +22,7 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=tmchugh777_pipelines-java
+      sonar.projectName=tmchugh777_pipelines-java
 
 
 - task: Maven@4

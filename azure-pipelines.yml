@@ -16,8 +16,7 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'tmchugh777'
-    scannerMode: 'CLI'
-    configMode: 'file'
+    scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:

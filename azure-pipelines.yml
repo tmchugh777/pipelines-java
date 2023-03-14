@@ -24,32 +24,32 @@ steps:
       sonar.projectKey=tmchugh777_pipelines-java
 
 
-#- task: Maven@4
-  #inputs:
-    #mavenPomFile: 'pom.xml'
-    #publishJUnitResults: true
-    #testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    #javaHomeOption: 'JDKVersion'
-    #mavenVersionOption: 'Default'
-    #mavenAuthenticateFeed: false
-    #effectivePomSkip: false
-    #sonarQubeRunAnalysis: false
-    #sqMavenPluginVersionChoice: 'latest'
-
-#Build
-- task: Maven@3
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: 'Default'
     mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
+
+#Build
+#- task: Maven@3
+ # inputs:
+  #  mavenPomFile: 'pom.xml'
+   # publishJUnitResults: true
+    #testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    #javaHomeOption: 'JDKVersion'
+    #jdkVersionOption: '1.8'
+    #mavenVersionOption: 'Default'
+    #mavenOptions: '-Xmx3072m'
+    #mavenAuthenticateFeed: false
+    #effectivePomSkip: false
+    #sonarQubeRunAnalysis: true
+    #sqMavenPluginVersionChoice: 'latest'
 
 #Run sonar scan
 #- task: SonarCloudAnalyze@1

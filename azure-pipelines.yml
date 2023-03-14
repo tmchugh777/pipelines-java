@@ -48,11 +48,11 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    #sonarQubeRunAnalysis: false
-    #sqMavenPluginVersionChoice: 'latest'
+    sonarQubeRunAnalysis: false
+    sqMavenPluginVersionChoice: 'latest'
 
 #Run sonar scan
-- task: SonarCloudAnalyze@1
+#- task: SonarCloudAnalyze@1
 
 #Publish results
 - task: SonarCloudPublish@1

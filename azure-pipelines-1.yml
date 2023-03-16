@@ -119,11 +119,11 @@ stages:
           clean: all
         displayName: 'Deploy to PROD'
         strategy:
-        runOnce:
-          deploy:
-            steps:
-            - download: none
-            - script: echo "This is a test!"
-              displayName: "Run Tests"
+          runOnce:
+            deploy:
+              steps:
+              - download: none
+              - script: echo "This is a test!"
+                displayName: "Run Tests"
 
     

@@ -1,0 +1,129 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build_Test
+  displayName: Build
+  jobs:
+  - job:
+    workspace:
+      clean: all
+    steps:
+
+  # Prepare Analysis Configuration task
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: 'tmchugh777'
+          scannerMode: 'Other'
+          extraProperties: |
+            # Additional properties that will be passed to the scanner, 
+            # Put one key=value per line, example:
+            # sonar.exclusions=**/*.bin
+            sonar.projectKey=tmchugh777_pipelines-java
+            sonar.projectName=tmchugh777_pipelines-java
+
+
+      - task: Maven@4
+        inputs:
+          mavenPomFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: true
+          sqMavenPluginVersionChoice: 'latest'
+
+  #Build
+  #- task: Maven@3
+  # inputs:
+    #  mavenPomFile: 'pom.xml'
+    # publishJUnitResults: true
+      #testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      #javaHomeOption: 'JDKVersion'
+      #jdkVersionOption: '1.8'
+      #mavenVersionOption: 'Default'
+      #mavenOptions: '-Xmx3072m'
+      #mavenAuthenticateFeed: false
+      #effectivePomSkip: false
+      #sonarQubeRunAnalysis: true
+      #sqMavenPluginVersionChoice: 'latest'
+
+  #Run sonar scan
+  #- task: SonarCloudAnalyze@1
+
+      #Publish results
+      - task: SonarCloudPublish@1
+        inputs:
+          pollingTimeoutSec: '300'
+
+
+#- task: ServiceNow-DevOps-Build-Sonar-Registration@1
+ # inputs:
+  #  connectedServiceName: 'DevOps Connection'
+   # sonarProjectKey: 'tmchugh777_pipelines-java'
+    #sonarInstanceUrl: 'https://sonarcloud.io'
+
+- ${{ if startsWith(variables['Build.SourceBranch'],'refs/heads/main') }}:
+  - stage: DEV
+    displayName: Deploy DEV
+    jobs:
+      - deployment: deploy_dev
+        environment: DEV
+        workspace:
+          clean: all
+        displayName: 'Deploy to DEV'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: none
+                - script: echo "This is a test!"
+                  displayName: "Run Tests"
+
+  - stage: SYST
+    dependsOn: DEV
+    displayName: Deploy SYST
+    jobs:
+      - deployment: deploy_syst
+        environment: SYST
+        workspace:
+          clean: all
+        displayName: 'Deploy to SYST'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - download: none
+              - script: echo "This is a test!"
+                displayName: "Run Tests"
+
+
+  - stage: PROD
+    dependsOn: SYST
+    displayName: Deploy PROD
+    jobs:
+      - deployment: deploy_prod
+        environment: PROD
+        workspace:
+          clean: all
+        displayName: 'Deploy to PROD'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - download: none
+              - script: echo "This is a test!"
+                displayName: "Run Tests"
+
+    

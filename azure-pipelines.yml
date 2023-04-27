@@ -21,8 +21,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=tmchugh777_pipelines-java
-      sonar.projectName=tmchugh777_pipelines-java
+      sonar.projectKey=tmchugh777_pipelines-java2
+      sonar.projectName=tmchugh777_pipelines-java2
 
 
 - task: Maven@4
@@ -61,8 +61,8 @@ steps:
     pollingTimeoutSec: '300'
 
 
-- task: ServiceNow-DevOps-Build-Sonar-Registration@1
-  inputs:
-    connectedServiceName: 'DevOps Connection'
-    sonarProjectKey: 'tmchugh777_pipelines-java'
-    sonarInstanceUrl: 'https://sonarcloud.io'
+#- task: ServiceNow-DevOps-Build-Sonar-Registration@1
+ # inputs:
+  #  connectedServiceName: 'DevOps Connection'
+   # sonarProjectKey: 'tmchugh777_pipelines-java'
+    #sonarInstanceUrl: 'https://sonarcloud.io'
